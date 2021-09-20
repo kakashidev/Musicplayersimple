@@ -102,12 +102,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        //setting audio file to player
+        //music = MediaPlayer.create(this, R.raw.faded);        Session 1 comment
+        //music.start();        Session 1 comment
+
         //calling playMusic to start first song at start of application
-        playMusic(0);
+        playMusic(0);   //Next Session comment
 
 
         //creating listener for the play pause button
         ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
