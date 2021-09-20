@@ -4,49 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerInParent="false"
+    android:layout_centerHorizontal="false"
+    android:layout_centerVertical="false"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
         android:layout_marginBottom="1dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="300dp"
-            android:layout_height="350dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/faded_cover_image"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="50dp"
-            />
+            android:id="@+id/coverArt"
+            android:layout_width="250dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/faded_cover_image" />
 
         <TextView
             android:id="@+id/songNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="3dp"
+            android:gravity="center_horizontal"
             android:text="Faded"
             android:textColor="#673AB7"
             android:textSize="24sp" />
-
-
-
-
-
 
 
         <TextView
@@ -55,18 +52,48 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="3dp"
+            android:gravity="center_horizontal"
             android:text="Alan Walker"
             android:textColor="#8761CC"
             android:textSize="18sp" />
 
-        <ImageButton
-            android:id="@+id/playButton"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            app:srcCompat="@drawable/ic_baseline_play_arrow_64"
-            android:background="@drawable/play_pause_button"
-            tools:ignore="VectorDrawableCompat" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/playPreviousButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/ic_baseline_arrow_left_24"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
+                android:id="@+id/playButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:background="@drawable/play_pause_button"
+                app:srcCompat="@drawable/ic_baseline_pause_64"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
+                android:id="@+id/playNextButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/ic_baseline_arrow_right_24"
+                tools:ignore="VectorDrawableCompat" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
