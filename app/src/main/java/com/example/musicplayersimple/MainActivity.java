@@ -10,12 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    MediaPlayer music;
     int index=0;
+    MediaPlayer music;
+
 
     //2D Array of songs and getting resource from its name
-    String[][] mySounds = {{"faded", "bad_liar", "paris"},
+    String[][] soundResources = {{"faded", "bad_liar", "paris",},
             {"faded_cover_image", "bad_liar_cover_image", "paris_cover_image"},
             {"Faded", "Bad Liar", "Paris"},
             {"Alan Walker", "Imagine Dragons", "The Chainsmokers"}};
@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    //function for creating media player for playing music
     public void playMusic(int index){
-        int mp3Resource = getResources().getIdentifier(mySounds[0][index], "raw" , getPackageName());
-        int coverArtResource = getResources().getIdentifier(mySounds[1][index], "drawable", getPackageName());
+        int mp3Resource = getResources().getIdentifier(soundResources[0][index], "raw" , getPackageName());
+        int coverArtResource = getResources().getIdentifier(soundResources[1][index], "drawable", getPackageName());
 
         //setting the song file to player
         music = MediaPlayer.create(this, mp3Resource);
@@ -42,15 +42,59 @@ public class MainActivity extends AppCompatActivity {
         //Setting song name & artist name
         TextView songName = (TextView) findViewById(R.id.songNameTextView);
         TextView singerName = (TextView) findViewById(R.id.singerNameTextView);
-        songName.setText(mySounds[2][index]);
-        singerName.setText(mySounds[3][index]);
+        songName.setText(soundResources[2][index]);
+        singerName.setText(soundResources[3][index]);
 
         //for music to start again if song is finished
-        music.setLooping(true);
+
+        //to start next song after current song is finished
+        music.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                goToNextSong();
+            }
+        });
 
         ImageView cover_art = (ImageView) findViewById(R.id.coverArt);
         cover_art.setImageResource(coverArtResource);
     }
+
+
+    //function for going to next song
+    public void goToNextSong()
+    {
+        music.release();
+        music=null;
+        if(index != 2)
+        {
+            index++;
+        }
+        else
+        {
+            index = 0;
+        }
+        playMusic(index);
+    }
+
+
+    //function for going to previous song
+    public void goToPreviousSong()
+    {
+        music.release();
+        music=null;
+        if(index!=0)
+        {
+            index--;
+        }
+        else
+        {
+            index=2;
+        }
+        playMusic(index);
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +102,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        //calling playMusic to start first song at start of application
         playMusic(0);
-        ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
+
+
         //creating listener for the play pause button
+        ImageButton playButton = (ImageButton) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,39 +126,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //creating listener for next song button
         ImageButton nextButton = (ImageButton) findViewById(R.id.playNextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                music.release();
-                music=null;
-                if(index != 2)
-                {
-                    index++;
-                }
-                else
-                {
-                    index = 0;
-                }
-                playMusic(index);
+                goToNextSong();
             }
         });
 
+
+        //creating listener for previous song
         ImageButton previousButton = (ImageButton) findViewById(R.id.playPreviousButton);
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                music.release();
-                music=null;
-                if(index!=0)
-                {
-                    index--;
-                }
-                else
-                {
-                    index=2;
-                }
-                playMusic(index);
+                goToPreviousSong();
             }
         });
     }
