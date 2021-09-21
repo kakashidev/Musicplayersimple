@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //2D Array of songs and getting resource from its name
-    String[][] soundResources = {{"faded", "bad_liar", "paris",},
+    String[][] soundResources = {{"faded", "bad_liar", "paris"},
             {"faded_cover_image", "bad_liar_cover_image", "paris_cover_image"},
             {"Faded", "Bad Liar", "Paris"},
             {"Alan Walker", "Imagine Dragons", "The Chainsmokers"}};
@@ -46,9 +46,10 @@ public class MainActivity extends AppCompatActivity {
         singerName.setText(soundResources[3][index]);
 
         //for music to start again if song is finished
+        //music.setLooping(true);
 
         //to start next song after current song is finished
-        music.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        music.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {  //last task
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 goToNextSong();
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
     //function for going to next song
     public void goToNextSong()
     {
-        music.release();
-        music=null;
+        music.release(); //optimization
+        music=null;     //after testing
         if(index != 2)
         {
             index++;
